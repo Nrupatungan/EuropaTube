@@ -2,7 +2,7 @@
 import animate from 'tailwindcss-animate'
 
 export default {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     './pages/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
@@ -72,6 +72,9 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        oswald: ["Oswald", "sans-serif"],
       },
     },
   },
