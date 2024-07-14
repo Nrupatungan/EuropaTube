@@ -1,1 +1,3 @@
 Implement search bar functionality
+Get search results in search list and populate it.
+Implement mobile option floater.
