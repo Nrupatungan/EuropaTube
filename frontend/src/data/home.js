@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-no-undef */
+
+
 export const categories = [
     "All",
     "JavaScript",
@@ -178,3 +181,4 @@ export const categories = [
         "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
     }
   ]
+

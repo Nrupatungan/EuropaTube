@@ -13,7 +13,6 @@ export const You = () => {
     const username = 'shaddybaby'
 
 
-
   return (
     <div className="overscroll-contain pb-5 lg:px-5">
         <div className="lg:relative">

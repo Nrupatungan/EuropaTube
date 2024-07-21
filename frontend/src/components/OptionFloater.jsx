@@ -10,7 +10,7 @@ export const OptionFloater = () => {
     const isLoggedIn = true
 
   return (
-      <div className="fixed bottom-0 flex items-center justify-around min-[500px]:justify-between min-[500px]:px-12 min-[620px]:px-16 min-[650px]:px-20 md:px-32 min-[900px]:px-36 w-full lg:hidden py-1.5 bg-black/70 dark:bg-black text-white/90">
+      <div className="fixed bottom-0 flex items-center justify-around min-[500px]:justify-between min-[500px]:px-12 min-[620px]:px-16 min-[650px]:px-20 md:px-32 min-[900px]:px-36 w-full lg:hidden py-1.5 bg-black/90 dark:bg-black/80 text-white/90">
         <Link to={'/'} className="flex flex-col items-center cursor-pointer">
             <TbHomeFilled size={'20'} className="active:scale-125 hover:scale-90 hover:text-blue-100 active:text-amber-200  transition duration-200" />
             <p className="text-[0.6rem]">Home</p>
@@ -37,7 +37,7 @@ export const OptionFloater = () => {
         ) 
         : (
             <Link to={'/feed/you'} className="flex flex-col items-center">
-                <RiUser3Fill size={'20'} className="cursor-pointer active:scale-125 hover:scale-90 hover:text-blue-100 active:text-amber-200  transition duration-200" />
+                <RiUser3Fill size={'20'} className="cursor-pointer active:scale-125 hover:scale-90 hover:text-blue-100 active:text-amber-200  transition duration-200 border border-white rounded-full" />
                 <p className="text-[0.6rem]">You</p>
             </Link >
         )

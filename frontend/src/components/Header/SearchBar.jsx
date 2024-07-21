@@ -11,6 +11,7 @@ import { videos } from "@/data/home";
 
 export const SearchBar = ({className=''}) => {
     const containerRef = useRef(null)
+    const searchContainerRef = useRef(null)
     const inputRef = useRef(null)
     const [query, setQuery] = useState('')
     const [searchResults, setSearchResults] = useState([]);
@@ -29,16 +30,27 @@ export const SearchBar = ({className=''}) => {
         const {value} = e.target;
         handleSearch(value);
         console.log('Query:', query);
+        if(value !== ''){
+            searchContainerRef.current.classList.remove('hidden')
+        }else{
+            searchContainerRef.current.classList.add('hidden')
+        }
     }
 
     const handleClear = () => {
         inputRef.current.value = ''
         setQuery('')
         setSearchResults([])
+        searchContainerRef.current.classList.add('hidden')
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+    }
+
+    const handleSuggestion = (title) => {
+        inputRef.current.value = title
+        setQuery(title)
     }
 
     useEffect(() => {
@@ -59,10 +71,10 @@ export const SearchBar = ({className=''}) => {
   return (
     <div className={`${className}`}>
         <CiSearch size={'22'} className="cursor-pointer active:scale-75 transition-all " onClick={handleClick}/>
-        <div  className="bg-background absolute z-[10000] top-0 left-0 h-screen w-[100svw] hidden"
+        <div className="bg-background absolute z-[100] top-0 left-0 h-screen w-[100svw] hidden overflow-y-scroll overscroll-none pb-5"
          ref={containerRef}
         >
-            <div className="h-14 w-full border-b-2 px-3 flex gap-4 items-center">
+            <div className="h-14 w-full sticky top-0 bg-background border-b-2 px-3 flex gap-4 items-center">
                 <BsArrowLeft size={'26'} className="cursor-pointer active:scale-75 transition-all" onClick={handleClick} />
                 <form className="flex-1" onSubmit={handleSubmit}>
                     <Input placeholder="Search EuropaTube" className='ring-offset-background dark:border-2 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'
@@ -76,24 +88,27 @@ export const SearchBar = ({className=''}) => {
             </div>
             
             {/* Add your search results here */}
-            {searchResults.map(result => {
-                return(
-                    <div key={result.id} className="flex gap-4 items-center px-3 pb-2 space-y-3 hover:bg-primary/10">
-                        <CiSearch size={'18'} className="mt-2.5" />
-                        <h3 className="text-sm flex-1">{result.title}</h3>
-                        <GoArrowUpLeft size={'18'} />
-                    </div>
-                )
-            })}
-            {searchResults.map(result => {
-                return(
-                    <div key={result.id} className="flex gap-4 items-center px-3 pb-2 space-y-3 hover:bg-primary/10">
-                        <CiSearch size={'18'} className="mt-2.5" />
-                        <h3 className="text-sm flex-1">{result.channel.name}</h3>
-                        <GoArrowUpLeft size={'18'} />
-                    </div>
-                )
-            })}
+            <div className="hidden" ref={searchContainerRef}>
+                {searchResults.map(result => {
+                    return(
+                        <div key={result.id} className="flex gap-4 items-center px-3 pb-2 space-y-3 hover:bg-primary/10 cursor-pointer">
+                            <CiSearch size={'18'} className="mt-2.5" />
+                            <h3 className="text-sm flex-1">{result.title}</h3>
+                            <GoArrowUpLeft size={'18'} onClick={() => handleSuggestion(result.title)} />
+                        </div>
+                    )
+                })}
+                {searchResults.map(result => {
+                    return(
+                        <div key={result.id} className="flex gap-4 items-center px-3 pb-2 space-y-3 hover:bg-primary/10 cursor-pointer">
+                            <CiSearch size={'18'} className="mt-2.5" />
+                            <h3 className="text-sm flex-1">{result.channel.name}</h3>
+                            <GoArrowUpLeft size={'18'} onClick={() => handleSuggestion(result.channel.name)} />
+                        </div>
+                    )
+                })}
+            </div>
+                
         </div>
     </div>
   )
