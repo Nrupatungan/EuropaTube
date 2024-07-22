@@ -63,24 +63,25 @@ export const SearchBarDesktop = () => {
   return (
         <form className="flex-1 max-lg:hidden relative" onSubmit={handleSubmit}>
             <Input
-                className='ring-offset-background dark:border-2 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 border-black dark:border-slate-400 pe-10'
+                className='ring-offset-background dark:border-2 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 border-black dark:border-slate-400 pe-10 min-[1900px]:h-[55px] min-[1900px]:text-[20px]'
                 placeholder='Search EuropaTube'
                 ref={searchInputRef}
                 onChange={handleChange}
             ></Input>
-            <GiCrossedSabres className="absolute right-3 top-3 cursor-pointer active:scale-75 transition duration-200"
+            <GiCrossedSabres className="absolute min-[1900px]:h-[20px] min-[1900px]:w-[20px] right-3 top-3 min-[1900px]:top-4 cursor-pointer active:scale-75 transition duration-200"
                 onClick={handleClear}
             />
-            <div className="absolute bg-black/90 dark:bg-black border-2 border-lime-400 text-white w-full h-auto max-h-[300px] overflow-y-scroll overscroll-none hidden"
+            <div className="absolute bg-black/90 dark:bg-black border-2 border-lime-400 text-white w-full h-auto max-h-[300px] min-[1900px]:max-h-[500px] overflow-y-scroll overscroll-none hidden"
             ref={containerRef}
             >
                 {/* Add your search results here */}
                 {searchResults?.map(result => {
                 return(
-                    <div key={result.id} className="flex gap-4 items-center px-3 pb-3 space-y-3 hover:bg-slate-500/90 hover:font-semibold cursor-pointer">
-                        <CiSearch size={'18'} className="mt-3" />
-                        <h3 className="text-sm flex-1">{result.title}</h3>
-                        <GoArrowUpLeft size={'18'} onClick={() => handleSuggestion(result.title)} />
+                    <div key={result.id} className="flex gap-4 min-[1900px]:gap-5 items-center px-3 pb-3 min-[1900px]:pb-4 space-y-3 min-[1900px]:space-y-5 hover:bg-slate-500/90 hover:font-semibold cursor-pointer">
+                        <CiSearch  className="mt-3 min-[1900px]:mt-5 h-[18px] w-[18px] min-[1900px]:h-[1.8rem] min-[1900px]:w-[1.8rem]" />
+                        <h3 className="text-sm min-[1900px]:text-xl flex-1">{result.title}</h3>
+                        <GoArrowUpLeft className="mt-3 h-[18px] w-[18px] min-[1900px]:h-[1.6rem] min-[1900px]:w-[1.6rem]" 
+                        onClick={() => handleSuggestion(result.title)} />
                     </div>
                 )
             })}

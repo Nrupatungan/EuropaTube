@@ -153,34 +153,34 @@ export const HamburgerMenu = () => {
     <Sheet>
     <SheetTrigger className='md:mr-4 sm:mr-2 max-lg:hidden' asChild>
         <Button variant="outline" size="icon" className='inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 py-2 px-0 text-base bg-transparent hover:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 border-0'>
-            <RxHamburgerMenu size={'22'} />
+            <RxHamburgerMenu className="h-[22px] w-[22px] min-[1900px]:h-[32px] min-[1900px]:w-[32px]" />
             <span className="sr-only">Toggle Menu</span>
         </Button>
     </SheetTrigger>
-    <SheetContent className='w-64 overflow-y-scroll overscroll-none pt-10 px-3' side={'left'}>
+    <SheetContent className='w-64 min-[1900px]:w-[500px] overflow-y-scroll overscroll-none pt-10 min-[1900px]:pt-16 px-3 min-[1900px]:px-5' side={'left'}>
         {initial.map(tiles => {
             const {id, icon: Icon, title, path} = tiles
             return (
               <Button key={id}
               variant={'outline'}
-              className='flex gap-3 mb-2 border-none text-sm font-semibold items-center justify-start w-full'
+              className='flex gap-3 min-[1900px]:h-[51px] min-[1900px]:gap-5 mb-2 min-[1900px]:mb-3 border-none text-sm min-[1900px]:text-lg font-semibold items-center justify-start w-full'
               onClick={() => navigate(path)}
               >
-                <Icon size={22} />
+                <Icon className="h-[22px] w-[22px] min-[1900px]:h-[30px] min-[1900px]:w-[30px]" />
                 {title}
               </Button>
             )
         })}
 
         <hr className="mt-5 mb-3 border-slate-600" />
-
+        
         <Button
               variant={'outline'}
-              className='flex gap-1 mb-2 border-none text-base font-semibold tracking-widest items-center justify-start w-full'
+              className='flex gap-1 min-[1900px]:h-[50px] min-[1900px]:gap-2 mb-2 min-[1900px]:mb-4 border-none text-base min-[1900px]:text-xl font-semibold tracking-widest items-center justify-start w-full'
               onClick={() => navigate('/feed/you')}
               >
                 You
-                <GoChevronRight size={20} className="pt-1" />
+                <GoChevronRight className="pt-1 h-[20px] w-[20px] min-[1900px]:h-[24px] min-[1900px]:w-[24px]" />
         </Button>
 
         {you.map(tiles => {
@@ -188,10 +188,10 @@ export const HamburgerMenu = () => {
             return (
               <Button key={id}
               variant={'outline'}
-              className='flex gap-3 mb-2 border-none text-sm font-semibold items-center justify-start w-full'
+              className='flex gap-3 min-[1900px]:h-[50px] min-[1900px]:gap-5 mb-2 min-[1900px]:mb-3 border-none text-sm min-[1900px]:text-lg font-semibold items-center justify-start w-full'
               onClick={() => navigate(path)}
               >
-                <Icon size={22} />
+                <Icon className="h-[22px] w-[22px] min-[1900px]:h-[30px] min-[1900px]:w-[30px]" />
                 {title}
               </Button>
             )
@@ -201,11 +201,11 @@ export const HamburgerMenu = () => {
 
         <Button
               variant={'outline'}
-              className='flex gap-1 mb-2 border-none text-base font-semibold tracking-wider items-center justify-start w-full'
+              className='flex gap-1 min-[1900px]:h-[50px] min-[1900px]:gap-2 mb-2 min-[1900px]:mb-4 border-none text-base min-[1900px]:text-xl font-semibold tracking-widest items-center justify-start w-full'
               onClick={() => navigate('/feed/explore')}
               >
                 Explore
-                <GoChevronRight size={20} className="pt-1" />
+                <GoChevronRight className="pt-1 h-[20px] w-[20px] min-[1900px]:h-[24px] min-[1900px]:w-[24px]" />
         </Button>
         
         {explore.map(tiles => {
@@ -213,10 +213,10 @@ export const HamburgerMenu = () => {
             return (
               <Button key={id}
               variant={'outline'}
-              className='flex gap-3 mb-2 border-none text-sm font-semibold items-center justify-start w-full'
+              className='flex gap-3 min-[1900px]:h-[50px] min-[1900px]:gap-5 mb-2 min-[1900px]:mb-3 border-none text-sm min-[1900px]:text-lg font-semibold items-center justify-start w-full'
               onClick={() => navigate(path)}
               >
-                <Icon size={22} />
+                <Icon className="h-[22px] w-[22px] min-[1900px]:h-[30px] min-[1900px]:w-[30px]" />
                 {title}
               </Button>
             )
@@ -224,7 +224,7 @@ export const HamburgerMenu = () => {
 
         <hr className="mt-5 mb-3 border-slate-600" />
 
-        <ul className="flex flex-wrap gap-1.5 text-xs mb-3 font-normal dark:font-semibold w-full">
+        <ul className="flex flex-wrap gap-1.5 min-[1900px]:gap-2 text-xs min-[1900px]:text-base mb-3 min-[1900px]:mb-5 font-normal dark:font-semibold w-full">
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">About</li>
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Press</li>
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Copyright</li>
@@ -234,7 +234,7 @@ export const HamburgerMenu = () => {
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Developers</li>
         </ul>
 
-        <ul className="flex flex-wrap gap-1.5 text-xs mb-4 font-normal dark:font-semibold w-full">
+        <ul className="flex flex-wrap gap-1.5 min-[1900px]:gap-2 text-xs min-[1900px]:text-base mb-4 min-[1900px]:mb-6 font-normal dark:font-semibold w-full">
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Terms</li>
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Privacy</li>
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Policy & Safety</li>
@@ -242,7 +242,7 @@ export const HamburgerMenu = () => {
             <li className="cursor-pointer hover:font-semibold dark:hover:font-normal">Test new features</li>
         </ul>
 
-        <p className="flex items-center text-gray-800 dark:text-gray-400 font-light dark:font-extralight text-xs gap-2"><AiOutlineCopyrightCircle size={12} /> 2024 Dinesh Sake INC</p>
+        <p className="flex items-center text-gray-800 dark:text-gray-400 font-light dark:font-extralight text-xs min-[1900px]:text-base gap-2"><AiOutlineCopyrightCircle size={12} /> 2024 Dinesh Sake INC</p>
     </SheetContent>
   </Sheet>
   )

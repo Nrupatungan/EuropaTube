@@ -18,16 +18,16 @@ export const Header = () => {
 
   return (
     <header className={`sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
-        <div className='container flex h-14 md:h-16 max-w-screen-2xl px-3 md:px-5 items-center justify-between lg:gap-32 xl:gap-64'>
+        <div className='container flex h-14 md:h-16 min-[1900px]:h-28 max-w-screen-2xl min-[1900px]:max-w-[1800px] px-3 md:px-5 items-center justify-between lg:gap-32 xl:gap-64'>
             <div className="flex items-center gap-5">
               <HamburgerMenu />
               <Link to='/'>
-                <EuropaTubeLogo fontSize="text-xl" fontColor="text-purple-600 dark:text-teal-300" className="font-semibold antialiased" />
+                <EuropaTubeLogo fontSize="text-xl min-[1900px]:text-3xl" fontColor="text-purple-600 dark:text-teal-300" className="font-semibold antialiased" />
               </Link>
             </div>
             <SearchBarDesktop />
             <div className="flex items-center justify-between space-x-2 md:justify-end">
-                <nav className="flex gap-1.5 md:gap-2 items-center">
+                <nav className="flex gap-1.5 md:gap-2 min-[1900px]:gap-6 items-center">
                     <ModeToggle />
                     <SearchBar className="lg:hidden" />
                     {!isLoggedIn
