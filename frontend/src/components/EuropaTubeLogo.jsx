@@ -6,6 +6,6 @@ export const EuropaTubeLogo = ({
     ...props
 }) => {
   return (
-    <h1 className={`${fontColor} ${fontSize} tracking-tighter ${className}`} {...props}>Europa<span className="font-oswald font-medium tracking-wide">Tube</span></h1>
+    <span className={`${fontColor} ${fontSize} tracking-tighter ${className}`} {...props}>Europa<span className="font-oswald font-medium tracking-wide">Tube</span></span>
   )
 }

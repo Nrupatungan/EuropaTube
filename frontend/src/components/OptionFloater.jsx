@@ -5,9 +5,11 @@ import { RiUser3Fill } from "react-icons/ri";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getInitials } from "@/utils/helper";
 
 export const OptionFloater = () => {
-    const isLoggedIn = true
+    const {isLoggedIn, user} = useSelector(state => state.auth)
 
   return (
       <div className="fixed bottom-0 flex items-center justify-around min-[500px]:justify-between min-[500px]:px-12 min-[620px]:px-16 min-[650px]:px-20 md:px-32 min-[900px]:px-36 w-full lg:hidden py-1.5 bg-black/90 dark:bg-black/80 text-white/90">
@@ -29,14 +31,14 @@ export const OptionFloater = () => {
         ? (
             <Link to={'/feed/you'} className="flex flex-col items-center cursor-pointer">
                 <Avatar className='w-[22px] h-[22px] active:scale-125 transition duration-200 border-2 border-white'>
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarImage src={user.avatar} alt={user.username} />
+                    <AvatarFallback className='text-black text-[0.7rem]'>{getInitials(user.fullName)}</AvatarFallback>
                 </Avatar>
                 <p className="text-[0.6rem]">You</p>
             </Link>
         ) 
         : (
-            <Link to={'/feed/you'} className="flex flex-col items-center">
+            <Link to={isLoggedIn ? '/feed/you' : '/login'} className="flex flex-col items-center">
                 <RiUser3Fill size={'20'} className="cursor-pointer active:scale-125 hover:scale-90 hover:text-blue-100 active:text-amber-200  transition duration-200 border border-white rounded-full" />
                 <p className="text-[0.6rem]">You</p>
             </Link >

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
     Avatar,
     AvatarFallback,
@@ -7,24 +8,49 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { LogOut, UserSquare } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useToast } from "../ui/use-toast"
+import { getInitials } from "@/utils/helper"
+import { useDispatch} from "react-redux"
+import { LogoutSuccess } from "@/store/slices/authSlice"
+import api from "@/utils/api"
 
-export const AvatarComp = () => {
+export const AvatarComp = ({
+  imageUrl,
+  alt,
+  fallback
+}) => {
   const navigate = useNavigate()
   const {toast} = useToast()
+  const dispatch = useDispatch()
+  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
   const handleLogout = async () => {
-      toast({
-        title: "Logged out",
-        description: "Logged out successfully!",
-      })
+      try{
+        await api.post('/users/logout', {}, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        dispatch(LogoutSuccess())
+        toast({
+          title: "Logged out",
+          description: "User Logged Out Successfully",
+        })
+
+      }catch(error){
+        console.log(error)
+        toast({
+          title: "Error",
+          description: "Failed to Logout",
+        })
+      }
   }
 
   return  (
     <DropdownMenu>
       <DropdownMenuTrigger className="ring-offset-transparent focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-full border-0">
         <Avatar className='w-[30px] h-[30px] min-[1900px]:w-[2.5rem] min-[1900px]:h-[2.5rem] active:scale-125 transition duration-200 max-lg:hidden'>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src={imageUrl} alt={alt} />
+            <AvatarFallback>{getInitials(fallback)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56 min-[1900px]:w-64 md:mr-4 md:mt-3'>

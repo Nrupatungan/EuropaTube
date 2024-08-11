@@ -135,8 +135,8 @@ const loginUser = asyncHandler( async (req, res) => {
 
     return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
+    .cookie("accessToken", accessToken, { ...options, expires: new Date(Date.now() + 1000 * 60 * 60)})
+    .cookie("refreshToken", refreshToken,{...options, expires: new Date(Date.now() + 3600000)})
     .json(
         new ApiResponse(
             200,
@@ -206,8 +206,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     
         return res
         .status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", newrefreshToken, options)
+        .cookie("accessToken", accessToken, {...options, expires: new Date(Date.now() + 1000 * 60 * 60)})
+        .cookie("refreshToken", newrefreshToken, {...options, expires: new Date(Date.now() + 3600000)})
         .json(
             new ApiResponse(
                 200, 

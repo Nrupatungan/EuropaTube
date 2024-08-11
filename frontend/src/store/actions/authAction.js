@@ -1,0 +1,55 @@
+import api from "@/utils/api";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { isAxiosError } from "axios";
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async (data, thunkAPI) => {
+    try {
+      const response = await api.post("/users/login", data,
+        {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+      );
+
+      return response.data.data;
+
+    } catch (error) {
+      if (isAxiosError(error)) {
+        if (error.response && error.response.data.message) {
+          // Assuming 'message' is of type string based on your usage
+          return thunkAPI.rejectWithValue(error.response.data.message);
+        }
+      }
+      // Fallback error message
+      return thunkAPI.rejectWithValue('An unexpected error occurred while logging in');
+    }
+  }
+);
+
+export const register = createAsyncThunk(
+  "auth/register",
+  async (data, thunkAPI) => {
+    try {
+      const response = await api.post("/users/register", data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }
+      );
+      return response.data.data;
+    } catch (error) {
+      if (isAxiosError(error)) {
+        if (error.response && error.response.data.message) {
+          // Assuming'message' is of type string based on your usage
+          return thunkAPI.rejectWithValue(error.response.data.message);
+        }
+      }
+      // Fallback error message
+      return thunkAPI.rejectWithValue('An unexpected error occurred while registering');
+    }
+  }
+)

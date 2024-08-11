@@ -7,14 +7,11 @@ import { HamburgerMenu } from "./HamburgerMenu";
 import { User } from "lucide-react"
 import { Button } from "../ui/button";
 import { AvatarComp } from "./AvatarComp";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
-  const isLoggedIn = true
+  const {isLoggedIn, user} = useSelector(state => state.auth)
   const navigate = useNavigate()
-
-  const handleClick = () => {
-    navigate("/login")
-  }
 
   return (
     <header className={`sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
@@ -31,14 +28,22 @@ export const Header = () => {
                     <ModeToggle />
                     <SearchBar className="lg:hidden" />
                     {!isLoggedIn
-                    ? <Button variant="outline" size="icon" className='inline-flex items-center justify-center whitespace-nowrap font-medium dark:border-slate-400 focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground py-2 px-0 text-base bg-transparent hover:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-full active:scale-75 transition-all duration-300 hover:bg-zinc-100 text-zinc-700 dark:hover:bg-[#272727] dark:text-white w-[40px] lg:w-[100px] h-[40px]'
-                    onClick={handleClick}
+                    ? (<>
+                    <Button variant="outline" size="icon" className='inline-flex items-center justify-center whitespace-nowrap font-medium dark:border-slate-400 focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground py-2 px-0 text-base bg-transparent hover:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-full active:scale-75 transition-all duration-300 hover:bg-zinc-100 text-zinc-700 dark:hover:bg-[#272727] dark:text-white w-[40px] lg:w-[100px] h-[40px] max-lg:hidden'
+                    onClick={() => navigate('/login')}
                     >
                         <User size={16}></User>
                         <span className="hidden text-sm lg:inline-block ml-2">Log In</span>
                     </Button>
+                    <Button size="icon" className='font-medium pr-2 dark:border-slate-400 focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground text-base bg-transparent hover:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-full active:scale-75 transition-all duration-300 text-zinc-700 dark:hover:bg-[#272727] dark:text-white w-[40px] lg:w-[60px] h-[40px] max-lg:hidden'
+                    onClick={() => navigate('/signup')}
+                    >
+                        <span className="hidden text-sm lg:inline-block ml-2">Sign Up</span>
+                    </Button>
+                    </>
+                  )
                     :
-                    <AvatarComp />
+                    <AvatarComp imageUrl={user.avatar} alt={user.username} fallback={user.fullName} />
                   }
                 </nav>
             </div>
