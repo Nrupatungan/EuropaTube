@@ -21,29 +21,33 @@ export const AvatarComp = ({
   const navigate = useNavigate()
   const {toast} = useToast()
   const dispatch = useDispatch()
-  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
-  const handleLogout = async () => {
-      try{
+// Import the 'browser' object from 'webextension-polyfill'
+
+// ...
+const handleLogout = async () => {
+    try {
         await api.post('/users/logout', {}, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        dispatch(LogoutSuccess())
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        dispatch(LogoutSuccess());
         toast({
-          title: "Logged out",
-          description: "User Logged Out Successfully",
-        })
+            title: "Logged out",
+            description: "User Logged Out Successfully",
+        });
+    } catch (error) {
+        console.log(error);
+        toast({
+            title: "Error",
+            description: "Failed to Logout",
+        });
+    } finally {
+      setInterval(() => window.location.reload(), 2000)
+    }
+}
 
-      }catch(error){
-        console.log(error)
-        toast({
-          title: "Error",
-          description: "Failed to Logout",
-        })
-      }
-  }
 
   return  (
     <DropdownMenu>

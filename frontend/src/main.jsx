@@ -33,23 +33,23 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: 
-        <AuthLayout authentication={false}>
-          <Login />
-        </AuthLayout>
+          <AuthLayout authentication={false}>
+            <Login />
+          </AuthLayout>
   },
   {
     path: '/signup',
     element:
-        <AuthLayout authentication={false}>
-          <Signup />
-        </AuthLayout>
+          <AuthLayout authentication={false}>
+            <Signup />
+          </AuthLayout>
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>,
 )

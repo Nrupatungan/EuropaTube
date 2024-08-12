@@ -21,7 +21,6 @@ export const SearchBarDesktop = () => {
     const handleChange = (e) => {
         const {value} = e.target;
         handleSearch(value);
-        console.log('Query:', query);
         if(value !== ''){
          containerRef.current.classList.remove('hidden')
         }else{
@@ -56,7 +55,6 @@ export const SearchBarDesktop = () => {
             return null
         })
         setSearchResults(matchResults.filter(Boolean))
-        console.log(searchResults);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [query])
 

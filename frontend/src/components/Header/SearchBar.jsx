@@ -29,7 +29,6 @@ export const SearchBar = ({className=''}) => {
     const handleChange = (e) => {
         const {value} = e.target;
         handleSearch(value);
-        console.log('Query:', query);
         if(value !== ''){
             searchContainerRef.current.classList.remove('hidden')
         }else{
@@ -64,7 +63,6 @@ export const SearchBar = ({className=''}) => {
             return null
         })
         setSearchResults(matchResults.filter(Boolean))
-        console.log(searchResults);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [query])
 

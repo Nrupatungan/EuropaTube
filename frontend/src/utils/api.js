@@ -1,7 +1,7 @@
 import axios from "axios";
-import store from "@/store/store";
 import { LoginSucces } from "@/store/slices/authSlice";
-
+import { useDispatch } from "react-redux";
+import store from "@/store/store";
 
 // Create an Axios instance with withCredentials set to true
 const api = axios.create({
@@ -32,13 +32,14 @@ api.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
+        const dispatch = useDispatch()
         if(error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
-                const token = store.getState().auth.token.refreshToken;
-                const res = await api.post('/api/users/refresh-token', { token })
-                store.dispatch(LoginSucces(res.data.data))
-                originalRequest.headers['Authorization'] = `Bearer ${ token }`;
+                const tokens = store.getState().auth.token;
+                const res = await axios.post('/api/users/refresh-token', { refreshToken: tokens.refreshToken });
+                dispatch(LoginSucces(res.data.data))
+                originalRequest.headers['Authorization'] = `Bearer ${ tokens.accessToken }`;
                 return api(originalRequest);
             } catch (error) {
                 return Promise.reject(error)

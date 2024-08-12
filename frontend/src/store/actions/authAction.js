@@ -1,12 +1,11 @@
-import api from "@/utils/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 
 export const login = createAsyncThunk(
   "auth/login",
   async (data, thunkAPI) => {
     try {
-      const response = await api.post("/users/login", data,
+      const response = await axios.post("/api/users/login", data,
         {
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +32,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (data, thunkAPI) => {
     try {
-      const response = await api.post("/users/register", data,
+      const response = await axios.post("/api/users/register", data,
         {
             headers: {
                 "Content-Type": "multipart/form-data",
