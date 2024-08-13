@@ -97,7 +97,10 @@ export const Login = () => {
                   placeholder="Enter your password"
                   {...register("password", {
                     required: "Please enter your password",
-                    pattern: {value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, message: "Password must contain at least 8 characters, one uppercase letter, one lowercase letter and one number"}
+                    // pattern: {
+                    //   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/,
+                    //   message: "Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character"
+                    // }
                   })}
                   onFocus={handleFocus}
                   />

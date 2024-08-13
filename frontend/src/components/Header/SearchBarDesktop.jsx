@@ -1,17 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Input } from "../ui/input";
 import { GiCrossedSabres } from "react-icons/gi";
 import { debounce } from "@/utils/helper";
-import { videos } from "@/data/home";
+// import { videos } from "@/data/home";
 import { CiSearch } from "react-icons/ci";
 import { GoArrowUpLeft } from "react-icons/go";
+import { useMutation } from "@tanstack/react-query";
+import api from "@/utils/api";
 
 export const SearchBarDesktop = () => {
     const containerRef = useRef(null)
     const searchInputRef = useRef(null)
     const [query, setQuery] = useState('')
     const [searchResults, setSearchResults] = useState([]);
-    const searchQuery = new RegExp(query, 'i')
 
     const handleSearch = debounce((value) => {
         // Your search logic here
@@ -37,6 +38,7 @@ export const SearchBarDesktop = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        mutatedQuery.mutate()
     }
 
     const handleSuggestion = (title) => {
@@ -44,19 +46,13 @@ export const SearchBarDesktop = () => {
         setQuery(title)
     }
 
-    useEffect(() => {
-        const matchResults = videos.map(video => {
-            const titleMatch = video.title.match(searchQuery)
-            const channelNameMatch = video.channel.name.match(searchQuery)
-            const channelIdMatch = video.channel.id.match(searchQuery)
-            if (titleMatch || channelNameMatch || channelIdMatch) {
-                return video
-            }
-            return null
-        })
-        setSearchResults(matchResults.filter(Boolean))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [query])
+    const mutatedQuery = useMutation({
+        mutationKey: 'videos',
+        mutationFn: api.get(`/videos/?query=${query}`),
+        onSuccess: (data) => {
+            setSearchResults(data.data)
+        }
+    })
 
   return (
         <form className="flex-1 max-lg:hidden relative" onSubmit={handleSubmit}>

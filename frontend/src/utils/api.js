@@ -33,10 +33,10 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
         const dispatch = useDispatch()
+        const tokens = store.getState().auth.token;
         if(error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
-                const tokens = store.getState().auth.token;
                 const res = await axios.post('/api/users/refresh-token', { refreshToken: tokens.refreshToken });
                 dispatch(LoginSucces(res.data.data))
                 originalRequest.headers['Authorization'] = `Bearer ${ tokens.accessToken }`;

@@ -32,7 +32,6 @@ const getAllVideos = asyncHandler(async (req, res) => {
        .exec();
 
     const count = await Video.countDocuments(queryObj)
-    console.log('HI')
 
     return res
        .status(200)
