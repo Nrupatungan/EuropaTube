@@ -17,7 +17,8 @@ const getAllVideos = asyncHandler(async (req, res) => {
         const searchQuery = new RegExp(query, "i")
         queryObj.$or = [
             {title: searchQuery},
-            {'owner.fullName': searchQuery}
+            {'owner.fullName': searchQuery},
+            {description: searchQuery}
         ]
     }
 
