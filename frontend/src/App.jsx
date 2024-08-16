@@ -8,9 +8,8 @@ import { Outlet } from "react-router-dom"
 
 function App() {
 
-
   return (
-    <ThemeProvider>
+      <ThemeProvider>
       <div
       className='h-screen bg-background flex flex-col relative'
       >
