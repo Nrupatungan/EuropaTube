@@ -16,7 +16,7 @@ function App() {
         <Header></Header>
         <div className="flex h-screen flex-grow-1 overflow-hidden">
         <Sidebar />
-        <div className="overflow-scroll px-4 pb-4 pt-4 flex-1">
+        <div className="overflow-scroll pb-4 pt-4 flex-1">
           <Outlet />
         </div>
         </div>

@@ -96,15 +96,8 @@ const registerUser = asyncHandler( async (req, res) => {
 } )
 
 const loginUser = asyncHandler( async (req, res) => {
-    //req body -> data
-    //username and email
-    //find the user
-    //check password
-    //access and refresh token
-    //send cookies
 
     const {email, username, password} = req.body
-    // console.log(req.body)
     if(!(username || email)){
         throw new ApiError(400, "username or email is required")
     }
@@ -393,6 +386,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         },
         {
             $project: {
+                _id: 1,
                 fullName: 1,
                 username: 1,
                 subscribersCount: 1,
@@ -400,7 +394,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
                 isSubscribed: 1,
                 avatar: 1,
                 coverImage: 1,
-                email: 1
+                email: 1,
             }
         }
     ])

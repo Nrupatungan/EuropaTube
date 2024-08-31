@@ -1,55 +1,54 @@
-import mongoose from "mongoose"
 import {Video} from "../models/video.model.js"
 import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
 import {deleteFromCloudinary, uploadOnCloudinary} from "../services/cloudinary.js"
+import { mongo } from "mongoose"
 
 
 const getAllVideos = asyncHandler(async (req, res) => {
     //TODO: get all videos based on query, sort, pagination
     //set sortType as either -1(asc) or 1(desc)
-    const { page = 1, limit = 10, query, sortBy = "createdAt", sortType = -1} = req.query
+    const { page = 1, limit = 8, query, sortBy = "createdAt", sortType = -1, ownerId} = req.query
     const skip = (page - 1) * limit
     const queryObj = {}
     
-    if (query) {
-        const searchQuery = new RegExp(query, "i")
-        queryObj.$or = [
-            {title: searchQuery},
-            {'owner.fullName': searchQuery},
-            {description: searchQuery}
-        ]
+    if(ownerId) {
+        queryObj.owner = new mongo.ObjectId(ownerId)
     }
-
+    else if (query) {
+        const searchQuery = new RegExp(query, "i");
+    
+        queryObj.$or = [
+          { title: searchQuery },
+          { description: searchQuery },
+        ];
+    }
+    
     const videos = await Video.find(queryObj)
-       .populate({
-            path: "owner",
-            select: "fullName avatar"
-        })
-       .sort({[sortBy]: sortType})
-       .skip(skip)
-       .limit(limit)
-       .exec();
-
-    const count = await Video.countDocuments(queryObj)
-
-    return res
-       .status(200)
-       .json(new ApiResponse(
-        200, 
-        {
-            data:videos,
-            meta:{
-                page, 
-                limit, 
-                count, 
-                sortBy, 
-                sortType
-            } 
-        }, 
-        "successfully fetched all videos"
-    ));
+     .populate({
+        path: "owner",
+        select: "fullName avatar username",
+      })
+        .sort({ [sortBy]: sortType })
+        .skip(skip)
+        .limit(limit)
+        .exec();
+    
+      const count = await Video.countDocuments(queryObj);
+    
+      return res
+        .status(200)
+        .json(
+          new ApiResponse(
+            200,
+            {
+              data: videos,
+              meta: { page, limit, count, sortBy, sortType },
+            },
+            "successfully fetched all videos"
+          )
+        );
     
 })
 

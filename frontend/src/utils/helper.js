@@ -73,4 +73,14 @@ function viewsFormatter(views) {
   return views.toFixed(2).replace(/\.?0+$/, '') + units[unitIndex];
 }
 
-export {getInitials, timeSince, formatDuration, debounce, viewsFormatter}
+function subscribersFormatter(subscribers){
+  const units = ['', 'K', 'M', 'B', 'T'];
+  let unitIndex = 0;
+  while (subscribers >= 1000 && unitIndex < units.length - 1) {
+    subscribers /= 1000;
+    unitIndex++;
+  }
+  return subscribers.toFixed(2).replace(/\.?0+$/, '') + units[unitIndex] + (subscribers === 1 ? ' subscriber' : ' subscribers');
+}
+
+export {getInitials, timeSince, formatDuration, debounce, viewsFormatter, subscribersFormatter}

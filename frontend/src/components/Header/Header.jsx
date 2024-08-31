@@ -13,8 +13,8 @@ export const Header = () => {
   const {isLoggedIn, user} = useSelector(state => state.auth)
 
   return (
-    <header className={`sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60`}>
-        <div className='container flex h-14 md:h-16 min-[1900px]:h-28 max-w-screen-2xl min-[1900px]:max-w-[1800px] px-3 md:px-5 items-center justify-between lg:gap-32 xl:gap-64'>
+    <header className='sticky top-0 z-50 py-1 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+        <div className='container flex h-12 md:h-14 min-[1900px]:h-28 max-w-screen-2xl min-[1900px]:max-w-[1800px] px-3 md:px-5 items-center justify-between lg:gap-32 xl:gap-64'>
             <div className="flex items-center gap-5">
               <HamburgerMenu />
               <Link to='/'>

@@ -12,6 +12,11 @@ import { AuthLayout } from './components/AuthLayout.jsx'
 import { Signup } from './Pages/Signup.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import DetailedVideo from './Pages/DetailedVideo.jsx'
+import { Channel } from './Pages/Channel/Channel.jsx'
+import { Videos } from './Pages/Channel/Videos.jsx'
+import { Playlists } from './Pages/Channel/Playlists.jsx'
+import { Posts } from './Pages/Channel/Posts.jsx'
 
 
 const queryClient = new QueryClient()
@@ -32,7 +37,28 @@ const router = createBrowserRouter([
           <You />
         </AuthLayout>
       },
-
+      {
+        path: '/detailed-video/:id',
+        element: <DetailedVideo />
+      },
+      {
+        path: '/channel/:username',
+        element: <Channel />,
+        children: [
+          {
+            path: 'videos/:id',
+            element: <Videos />
+          },
+          {
+            path: 'playlists/:id',
+            element: <Playlists />
+          },
+          {
+            path: 'posts/:id',
+            element: <Posts />
+          }
+        ]
+      }
     ],
   },
   {

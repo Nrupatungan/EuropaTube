@@ -30,10 +30,11 @@ export const Signup = () => {
   })
 
   const onSumbit = (data) => {
+    const username = '@' + data.username;
 
     const formData = new FormData();
     formData.set("fullName", data.fullName);
-    formData.set("username", data.username);
+    formData.set("username", username);
     formData.set("password", data.password);
     formData.set("email", data.email);
 

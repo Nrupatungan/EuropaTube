@@ -14,28 +14,34 @@ export const VideoCard = (
         channelName,
         channelAvatar,
         postedOn,
-        onClickFunction,
+        imageClickFunction,
+        ownerClickFunction,
         className
     }
 ) => {
   return (
     <Card className={`border-none dark:bg-transparent rounded-[0.8rem] overflow-hidden ${className}`}
-    onClick={onClickFunction}
     >
-      <CardContent className="w-full h-[13rem] min-[1900px]:h-[20rem] p-0 mb-2 relative">
+      <CardContent className="w-full h-[13rem] min-[1900px]:h-[20rem] p-0 mb-2 relative"
+      onClick={imageClickFunction}
+      >
         <img
           src={thumbnail}
           alt=""
-          className="w-full h-full object-fill rounded-b-[0.8rem]"
+          className="w-full h-full object-fill rounded-[1rem]"
         />
         <span className="absolute bg-black/80 text-xs min-[1900px]:text-base px-1 rounded-sm font-semibold bottom-1.5 right-3 text-white py-0.5">{duration}</span>
       </CardContent>
       <CardFooter className="flex items-start justify-between p-2">
         <div className="flex gap-3.5 items-start mb-5">
-        <Avatar className='active:scale-75 transition-all duration-300 min-[1900px]:h-[3.5rem] min-[1900px]:w-[3.5rem]'>
-          <AvatarImage src={channelAvatar} alt={channelName} className='object-fill'/>
-          <AvatarFallback>{getInitials(channelName)}</AvatarFallback>
-        </Avatar>
+          <div
+          onClick={ownerClickFunction}
+          >
+            <Avatar className='active:scale-75 transition-all duration-300 min-[1900px]:h-[3.5rem] min-[1900px]:w-[3.5rem]'>
+            <AvatarImage src={channelAvatar} alt={channelName} className='object-fill'/>
+            <AvatarFallback>{getInitials(channelName)}</AvatarFallback>
+          </Avatar>
+          </div>
           <div>
             <h3 className="text-base min-[1900px]:text-[22px] min-[1900px]:mb-3 leading-[1.5rem] min-[1900px]:leading-[2rem] overflow-hidden overflow-ellipsis line-clamp-2 font-semibold text-gray-700 dark:text-white w-[90%] mb-1.5">
               {title}

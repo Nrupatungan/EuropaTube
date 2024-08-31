@@ -12,7 +12,7 @@ export const You = () => {
     const navigation = useNavigate()
 
   return (
-    <div className="overscroll-contain pb-5 lg:px-5">
+    <div className="overscroll-contain pb-5 px-2 lg:px-5">
         <div className="lg:relative">
             <BsArrowLeft size={'22'} className="cursor-pointer active:scale-75 transition-all mb-5"
             onClick={() => navigation('/')}

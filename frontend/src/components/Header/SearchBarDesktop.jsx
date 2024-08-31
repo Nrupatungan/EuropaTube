@@ -21,6 +21,7 @@ export const SearchBarDesktop = () => {
     select: (data) => data?.data || [],
     enabled: !!query,
     staleTime: 1000 * 60 * 5, // 5 minutes
+    debounce
   });
 
   const handleClear = () => {
@@ -37,7 +38,7 @@ export const SearchBarDesktop = () => {
 
   const handleSuggestion = (title) => {
     searchInputRef.current.value = title;
-    debounce(() => {setQuery(title);}, 300)
+    setQuery(title)
   };
 
   return (
@@ -46,7 +47,9 @@ export const SearchBarDesktop = () => {
         className="ring-offset-background dark:border-2 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 border-black dark:border-slate-400 pe-10 min-[1900px]:h-[55px] min-[1900px]:text-[20px]"
         placeholder="Search EuropaTube"
         ref={searchInputRef}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setTimeout(() => setQuery(e.target.value), 150)
+        }}
       />
       <GiCrossedSabres
         className="absolute min-[1900px]:h-[20px] min-[1900px]:w-[20px] right-3 top-3 min-[1900px]:top-4 cursor-pointer active:scale-75 transition duration-200"
